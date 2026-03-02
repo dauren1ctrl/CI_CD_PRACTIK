@@ -1,15 +1,13 @@
 import unittest
-from main import add
+from main import add, multiply
 
-# Pytest автоматически найдет функции, начинающиеся с test_
-def test_add_simple():
-    assert add(2, 3) == 5
-    assert add(-1, 1) == 0
-
-# Либо через класс unittest
 class TestMath(unittest.TestCase):
-    def test_add_class(self):
-        self.assertEqual(add(100, 200), 300)
+    def test_add(self):
+        self.assertEqual(add(1, 2), 3)
+
+    def test_multiply(self):
+        self.assertEqual(multiply(3, 4), 12)
+        self.assertEqual(multiply(-1, 5), -5)
 
 if __name__ == '__main__':
     unittest.main()
