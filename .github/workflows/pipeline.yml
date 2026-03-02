@@ -1,0 +1,35 @@
+name: Python CI/CD Practice
+
+# Триггеры: запускать при пуше в ветку main или при создании PR
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # Используем последнюю версию Ubuntu как виртуальную среду
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Копируем код репозитория на виртуальную машину
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Настраиваем Python (твоя версия 3.14)
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.14"
+
+    # 3. Устанавливаем зависимости (pip и pytest)
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pytest
+
+    # 4. Запускаем тесты
+    - name: Run tests with pytest
+      run: |
+        python -m pytest
